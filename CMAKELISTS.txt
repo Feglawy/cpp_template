@@ -1,0 +1,27 @@
+# /CMakeLists.txt
+
+cmake_minimum_required(VERSION 3.10)
+
+set(PROJECT_NAME "PROJECT_NAME")
+
+project(${PROJECT_NAME}) # project name   
+
+# Add the include directory to the project
+include_directories(include)
+
+# Collect all header files in the include directory
+file(GLOB HEADER_FILES "include/*.hpp") # you can add also your library dir here "include/LIBRARY_NAME/*.hpp"
+
+# Collect all source files in the src directory
+# file(GLOB SRC_FILES "src/LIBRARY_NAME/*.cpp")
+
+# set(LIBRARY_NAME "LIBRARY_NAME")
+
+# Create a library with all source files and header files
+# add_library(${LIBRARY_NAME} ${SRC_FILES} ${HEADER_FILES})
+
+# Create executables for each main file
+add_executable(main "src/main.cpp")
+
+# Link the library to the executables
+# target_link_libraries(main LIBRARY_NAME)
