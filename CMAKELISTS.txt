@@ -1,27 +1,32 @@
-# /CMakeLists.txt
-
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME "PROJECT_NAME")
+set(PROJECT_NAME "PROJECT_NAME") # Replace with your actual project name
+project(${PROJECT_NAME})
 
-project(${PROJECT_NAME}) # project name   
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add the include directory to the project
 include_directories(include)
 
 # Collect all header files in the include directory
-file(GLOB HEADER_FILES "include/*.hpp") # you can add also your library dir here "include/LIBRARY_NAME/*.hpp"
+file(GLOB HEADER_FILES "include/*.hpp" "include/library/*.hpp") # replace with your library name directory
 
 # Collect all source files in the src directory
-# file(GLOB SRC_FILES "src/LIBRARY_NAME/*.cpp")
+file(GLOB SRC_FILES "src/*.cpp" "src/library/*.cpp")
 
-# set(LIBRARY_NAME "LIBRARY_NAME")
+# Optionally, set up a library (if you have one)
+add_library(my_library ${SRC_FILES} ${HEADER_FILES})
 
-# Create a library with all source files and header files
-# add_library(${LIBRARY_NAME} ${SRC_FILES} ${HEADER_FILES})
-
-# Create executables for each main file
+# Create an executable for the main program
 add_executable(main "src/main.cpp")
 
-# Link the library to the executables
-# target_link_libraries(main LIBRARY_NAME)
+# Link the library to the main executable
+target_link_libraries(main my_library)
+
+# Enable testing
+enable_testing()
+
+# Optionally include the tests subdirectory
+add_subdirectory(tests)
