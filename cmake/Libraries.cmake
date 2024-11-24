@@ -1,4 +1,5 @@
 # Libraries Configuration
+include_guard(GLOBAL)
 
 # List of libraries to be added (name and relative path)
 # Format: <library_name> <source_directory>
@@ -25,8 +26,7 @@ foreach(idx RANGE 0 [expr LIBRARIES_COUNT - 1])
     file(GLOB LIB_SRC_FILES "${CMAKE_SOURCE_DIR}/${LIB_PATH}/*.cpp")
 
     if(LIB_SRC_FILES)
-        # Add the library
-        add_library(${LIB_NAME} ${LIB_SRC_FILES})
-        set(ALL_LIBRARIES ${ALL_LIBRARIES} ${LIB_NAME})
+            add_library(${LIB_NAME} ${LIB_SRC_FILES})
+            set(ALL_LIBRARIES ${ALL_LIBRARIES} ${LIB_NAME})
     endif()
 endforeach()

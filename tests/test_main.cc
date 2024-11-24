@@ -1,10 +1,5 @@
 #include <gtest/gtest.h>
-
-// A simple function to test
-int add(int a, int b)
-{
-    return a + b;
-}
+#include "library/test_lib.hpp"
 
 // Define test cases
 TEST(AdditionTest, PositiveNumbers)

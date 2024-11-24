@@ -1,5 +1,4 @@
 include(FetchContent)
-include(cmake/config.cmake)
 
 # Use provided version or fallback to default
 if(NOT DEFINED GTEST_VERSION)

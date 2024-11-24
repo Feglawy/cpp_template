@@ -1,4 +1,9 @@
+# Include project configuration
 include(cmake/config.cmake)
+
+# Include libraries configuration
+include(cmake/Libraries.cmake)
+
 cmake_minimum_required(VERSION 3.10)
 
 project(${PROJECT_NAME} VERSION ${MYPROJECT_VERSION})
@@ -13,9 +18,6 @@ add_subdirectory(src)
 if(ENABLE_TESTING)
     # Enable testing
     enable_testing()
-
-    # Include GoogleTest configuration
-    include(cmake/FetchGoogleTest.cmake)
 
     add_subdirectory(tests)
 endif()
