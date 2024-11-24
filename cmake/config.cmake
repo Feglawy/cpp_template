@@ -4,7 +4,7 @@ set(PROJECT_NAME "PROJECT_NAME" CACHE STRING "Name of the project")
 set(MYPROJECT_VERSION "1.0.0" CACHE STRING "Version of the project")
 
 # C++ Standard
-set(MYPROJECT_CXX_STANDARD 14 CACHE STRING "C++ standard for the project")
+set(MYPROJECT_CXX_STANDARD 17 CACHE STRING "C++ standard for the project")
 set(CMAKE_CXX_STANDARD ${MYPROJECT_CXX_STANDARD})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
