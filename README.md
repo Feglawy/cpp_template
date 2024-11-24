@@ -5,7 +5,7 @@ Project Structure
 
 The structure of the project is as follows:
 
-```
+```structure
 Project/
 ├── CMakeLists.txt      # CMake build configuration
 ├── include/            # Directory for header files
@@ -95,7 +95,7 @@ set(GTEST_VERSION "v1.15.2" CACHE STRING "Version of GoogleTest to fetch")
 
 ```
 
-### Key Points:
+### Key Points
 
 - `set(PROJECT_NAME  "PROJECT_NAME")` : Set your project name.
 - `option(ENABLE_TESTING ON)` : Set if you will use tests or not `ON` for true `OFF` for false.
