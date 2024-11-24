@@ -16,16 +16,16 @@ Project/
 │   └── main.cpp        # Main program file
 ├── tests/              # Directory for test files
 ├── build/              # Build directory created after running CMake
-└── cmake/              # Optional directory for CMake scripts (optional)
+└── cmake/              # directory for CMake scripts
 ```
 
-## Key Folders:
+## Key Folders
 
 - `include/`: Contains all your header files (.hpp). You can organize headers for different libraries into subdirectories within include/library/ if necessary.
 
 - `src/`: Contains all your source files (.cpp). You can organize source files for different libraries into subdirectories within src/library/.
 
-- `cmake/`: (Optional) This directory can store additional CMake configuration files.
+- `cmake/`: This directory can store additional CMake configuration files.
 - `tests/`: (Optional) Contains all test files
 
 ## How to Configure and Build the Project
@@ -74,55 +74,43 @@ Project/
 
 ## CMake Configuration
 
-Here is a breakdown of the `CMakeLists.txt`:
+Here is a breakdown of the `cmake/config.cmake`:
 
 ```cmake
-cmake_minimum_required(VERSION 3.10)
+# Project configuration
 
-set(PROJECT_NAME "PROJECT_NAME") # Replace with your actual project name
-project(${PROJECT_NAME})
+set(PROJECT_NAME "PROJECT_NAME" CACHE STRING "Name of the project")
+set(MYPROJECT_VERSION "1.0.0" CACHE STRING "Version of the project")
 
-# Set C++ standard
-set(CMAKE_CXX_STANDARD 14)
+# C++ Standard
+set(MYPROJECT_CXX_STANDARD 14 CACHE STRING "C++ standard for the project")
+set(CMAKE_CXX_STANDARD ${MYPROJECT_CXX_STANDARD})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add the include directory to the project
-include_directories(include)
+# Option to enable or disable testing
+option(ENABLE_TESTING "Enable testing support" ON)
 
-# Collect all header files in the include directory
-file(GLOB HEADER_FILES "include/*.hpp" "include/library/*.hpp")
+# Define GoogleTest version
+set(GTEST_VERSION "v1.15.2" CACHE STRING "Version of GoogleTest to fetch")
 
-# Collect all source files in the src directory
-file(GLOB SRC_FILES "src/*.cpp" "src/library/*.cpp")
-
-# Optionally, set up a library (if you have one)
-add_library(my_library ${SRC_FILES} ${HEADER_FILES})
-
-# Create an executable for the main program
-add_executable(main "src/main.cpp")
-
-# Link the library to the main executable
-target_link_libraries(main my_library)
-
-# Enable testing
-enable_testing()
-
-# Optionally include the tests subdirectory
-add_subdirectory(tests)
 ```
 
 ### Key Points:
 
-- `include_directories()`: Adds the include folder to the project, where header files are located.
-
-- `file(GLOB ...)`: Collects all header files in the include/ directory. You can add library directories like include/library/ as needed.
-
-- `add_executable()`: Defines the main executable for the project using src/main.cpp.
-
-- `add_library()` and `target_link_libraries()`: These lines are commented out in the template but can be used to add and link libraries to the executable.
+- `set(PROJECT_NAME  "PROJECT_NAME")` : Set your project name.
+- `option(ENABLE_TESTING ON)` : Set if you will use tests or not `ON` for true `OFF` for false.
 
 ### Customizing the Project
 
-- Add More Libraries: You can add additional libraries by organizing files in the `include/library/` and `src/library/` directories, and uncommenting the `add_library()` and `target_link_libraries()` sections in `CMakeLists.txt`.
+#### Add More Libraries
 
-- Modify the Project Name: Replace `"PROJECT_NAME"` in `CMakeLists.txt` with the actual name of your project.
+You can add other librarys to your project in the `cmake/Libraries.cmake` file you just have to library name and its path in
+
+Format: <library_name> <source_directory>
+
+```cmake
+set(PROJECT_LIBRARIES
+    "library" "src/library"
+    # Add more libraries as needed
+)
+```

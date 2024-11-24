@@ -1,32 +1,21 @@
+include(cmake/config.cmake)
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME "PROJECT_NAME") # Replace with your actual project name
-project(${PROJECT_NAME})
-
-# Set C++ standard
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(${PROJECT_NAME} VERSION ${MYPROJECT_VERSION})
 
 # Add the include directory to the project
 include_directories(include)
 
-# Collect all header files in the include directory
-file(GLOB HEADER_FILES "include/*.hpp" "include/library/*.hpp") # replace with your library name directory
+# Add subdirectories for sources and tests
+add_subdirectory(src)
 
-# Collect all source files in the src directory
-file(GLOB SRC_FILES "src/*.cpp" "src/library/*.cpp")
 
-# Optionally, set up a library (if you have one)
-add_library(my_library ${SRC_FILES} ${HEADER_FILES})
+if(ENABLE_TESTING)
+    # Enable testing
+    enable_testing()
 
-# Create an executable for the main program
-add_executable(main "src/main.cpp")
+    # Include GoogleTest configuration
+    include(cmake/FetchGoogleTest.cmake)
 
-# Link the library to the main executable
-target_link_libraries(main my_library)
-
-# Enable testing
-enable_testing()
-
-# Optionally include the tests subdirectory
-add_subdirectory(tests)
+    add_subdirectory(tests)
+endif()
