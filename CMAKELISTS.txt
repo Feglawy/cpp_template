@@ -18,6 +18,6 @@ add_subdirectory(src)
 if(ENABLE_TESTING)
     # Enable testing
     enable_testing()
-
+    message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
     add_subdirectory(tests)
 endif()

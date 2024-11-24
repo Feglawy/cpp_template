@@ -4,7 +4,7 @@ include(../cmake/FetchGoogleTest.cmake)
 include(GoogleTest)
 
 # Collect test source files
-file(GLOB TEST_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.cc")
+file(GLOB_RECURSE TEST_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.cc")
 
 # Define the test executable
 add_executable(${PROJECT_NAME}_tests ${TEST_FILES})
