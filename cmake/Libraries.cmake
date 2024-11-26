@@ -1,32 +1,49 @@
 # Libraries Configuration
-include_guard(GLOBAL)
 
 # List of libraries to be added (name and relative path)
+set(LIBRARY_PAIRS)
+
+# Function to add library pairs
+function(add_library_pair LIB_NAME LIB_PATH)
+    list(APPEND LIBRARY_PAIRS "${LIB_NAME},${LIB_PATH}")
+    set(LIBRARY_PAIRS ${LIBRARY_PAIRS} PARENT_SCOPE)  # Make sure changes are reflected in the parent scope
+endfunction()
+
 # Format: <library_name> <source_directory>
-set(PROJECT_LIBRARIES
-    "library" "src/library"
-    # Add more libraries as needed
-)
+# Add more libraries as needed
+add_library_pair("library" "src/library")
 
-# Iterate over the libraries and add them
-list(LENGTH PROJECT_LIBRARIES LIBRARIES_COUNT)
-math(EXPR LIBRARIES_COUNT "${LIBRARIES_COUNT} / 2") # Each library has a name and path
+# Container for all libraries added
+set(ALL_LIBRARIES)
 
-set(ALL_LIBRARIES "") # Container for all libraries added
+# Process the libraries
+foreach(pair IN LISTS LIBRARY_PAIRS)
+    string(REPLACE "," ";" split_pair ${pair})  # Split the pair string into list
 
-foreach(idx RANGE 0 [expr LIBRARIES_COUNT - 1])
-    math(EXPR name_idx "${idx} * 2")
-    math(EXPR path_idx "${name_idx} + 1")
+    list(GET split_pair 0 LIB_NAME)  # Get library name from the first element
+    list(GET split_pair 1 LIB_PATH)  # Get library path from the second element
 
-    # Extract the library name and path
-    list(GET PROJECT_LIBRARIES ${name_idx} LIB_NAME)
-    list(GET PROJECT_LIBRARIES ${path_idx} LIB_PATH)
+    # Full path to the library directory
+    set(LIB_DIR "${CMAKE_SOURCE_DIR}/${LIB_PATH}")
 
-    # Collect library source files
-    file(GLOB LIB_SRC_FILES "${CMAKE_SOURCE_DIR}/${LIB_PATH}/*.cpp")
-
-    if(LIB_SRC_FILES)
+    # Check if the library directory exists
+    if(EXISTS "${LIB_DIR}")
+        # Collect library source files
+        file(GLOB LIB_SRC_FILES "${LIB_DIR}/*.cpp")
+        
+        if(LIB_SRC_FILES)
+            # Add the library
             add_library(${LIB_NAME} ${LIB_SRC_FILES})
-            set(ALL_LIBRARIES ${ALL_LIBRARIES} ${LIB_NAME})
+            message(STATUS "Added library: ${LIB_NAME} from ${LIB_PATH}")
+            
+            # Store the library in the ALL_LIBRARIES list
+            list(APPEND ALL_LIBRARIES ${LIB_NAME})
+        else()
+            message(WARNING "No source files found for library: ${LIB_NAME} in ${LIB_PATH}")
+        endif()
+    else()
+        message(WARNING "Directory does not exist for library: ${LIB_NAME} in ${LIB_PATH}")
     endif()
 endforeach()
+
+set(ALL_LIBRARIES ${ALL_LIBRARIES} CACHE INTERNAL "List of all libraries")

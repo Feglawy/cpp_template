@@ -11,12 +11,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Option to enable or disable testing
 option(ENABLE_TESTING "Enable testing support" OFF)
 
+# Toggle for building a shared or static library
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
 # Define GoogleTest version
 set(GTEST_VERSION "v1.15.2" CACHE STRING "Version of GoogleTest to fetch")
 
+
+# Set global output directories
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/archive")
 
 message(STATUS "Project: ${PROJECT_NAME}")
 message(STATUS "Version: ${MYPROJECT_VERSION}")
 message(STATUS "C++ Standard: ${CMAKE_CXX_STANDARD}")
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "Libraries SHARED: ${BUILD_SHARED_LIBS}")
 message(STATUS "Tests enabled: ${ENABLE_TESTING}")
