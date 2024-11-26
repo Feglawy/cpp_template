@@ -8,8 +8,10 @@ endif()
 
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/refs/tags/${GTEST_VERSION}.zip
-  DOWNLOAD_EXTRACT_TIMESTAMP true
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG ${GTEST_VERSION}  # Use specific version or branch
+  GIT_SHALLOW ON            # Perform a shallow clone for efficiency
+  EXCLUDE_FROM_ALL          # Prevent building unless explicitly used
 )
 
 # For Windows, force shared CRT
