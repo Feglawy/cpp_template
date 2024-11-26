@@ -1,6 +1,6 @@
 # C++ Project Template
 
-This project template is designed to help you set up a C++ 14 project using CMake. The template is minimal yet flexible, allowing you to add libraries and expand your project as needed.
+This project template is designed to help you set up a C++ 17 project using CMake. The template is minimal yet flexible, allowing you to add libraries and expand your project as needed.
 Project Structure
 
 The structure of the project is as follows:
