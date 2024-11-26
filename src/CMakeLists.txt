@@ -10,3 +10,10 @@ add_executable(main "${CMAKE_SOURCE_DIR}/src/main.cpp" ${SRC_FILES})
 if(ALL_LIBRARIES)
     target_link_libraries(main ${ALL_LIBRARIES})
 endif()
+
+add_custom_command(TARGET main
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/data
+        $<TARGET_FILE_DIR:main>/data
+)

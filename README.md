@@ -14,6 +14,7 @@ Project/
 ├── src/                # Directory for source files
 │   ├── library/        # Optional directory for library sources
 │   └── main.cpp        # Main program file
+├── data/               # Data and resources directory
 ├── tests/              # Directory for test files
 ├── build/              # Build directory created after running CMake
 └── cmake/              # directory for CMake scripts
@@ -27,6 +28,7 @@ Project/
 
 - `cmake/`: This directory can store additional CMake configuration files.
 - `tests/`: (Optional) Contains all test files
+- `data/` : Store resources and data files in this direcotry
 
 ## How to Configure and Build the Project
 
