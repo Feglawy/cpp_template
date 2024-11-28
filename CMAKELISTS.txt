@@ -6,7 +6,14 @@ include(cmake/Libraries.cmake)
 
 cmake_minimum_required(VERSION 3.10)
 
-project(${PROJECT_NAME} VERSION ${MYPROJECT_VERSION})
+project(
+    ${PROJECT_NAME} 
+    DESCRIPTION ${MYPROJECT_DESCRIPTION}
+    VERSION ${MYPROJECT_VERSION}
+    LANGUAGES CXX
+)
+
+include(cmake/Conan.cmake)
 
 # Add the include directory to the project
 include_directories(include)
