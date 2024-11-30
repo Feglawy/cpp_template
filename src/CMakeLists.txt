@@ -11,12 +11,11 @@ if(ALL_LIBRARIES)
     target_link_libraries(main ${ALL_LIBRARIES})
 endif()
 
-# Copies data directory to the executable
-add_custom_command(TARGET main
-    POST_BUILD
+add_custom_target(copy_data ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/data
         $<TARGET_FILE_DIR:main>/data
+        COMMENT "Copying data directory to build directory"
 )
 
 add_custom_target(run
