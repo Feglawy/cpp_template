@@ -18,7 +18,7 @@ The structure of the project is as follows:
 └── 📁docs                      # Documentation files for the project
 └── 📁include                   # Directory for header files
     └── 📁library               # Optional subdirectory for library header files
-└── conf.hpp                    # Example header file, potentially for project-wide configurations
+    └── conf.hpp                # Example header file, potentially for project-wide configurations
 └── 📁src                       # Directory for source code files
     └── 📁library               # Optional subdirectory for library source files
     └── CMakeLists.txt          # CMake configuration for building the source code files
