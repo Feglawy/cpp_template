@@ -18,3 +18,9 @@ add_custom_command(TARGET main
         ${CMAKE_SOURCE_DIR}/data
         $<TARGET_FILE_DIR:main>/data
 )
+
+add_custom_target(run
+    COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/main
+    DEPENDS main
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
