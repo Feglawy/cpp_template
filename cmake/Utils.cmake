@@ -41,3 +41,22 @@ function(process_libraries)
 
     set(ALL_LIBRARIES ${ALL_LIBRARIES} CACHE INTERNAL "List of all libraries")
 endfunction()
+
+
+function(glob_source_files_exclude_main out_var dir)
+    # Glob all .cpp files in the specified directory
+    file(GLOB ALL_FILES "${dir}/*.cpp")
+    
+    # Create a new list to store filtered files
+    set(FILTERED_FILES)
+    
+    # Filter out files containing "main" in their name
+    foreach(FILE ${ALL_FILES})
+        if(NOT FILE MATCHES ".*main.*\\.cpp$")
+            list(APPEND FILTERED_FILES ${FILE})
+        endif()
+    endforeach()
+    
+    # Set the result in the output variable
+    set(${out_var} ${FILTERED_FILES} PARENT_SCOPE)
+endfunction()

@@ -1,7 +1,9 @@
+include(${CMAKE_SOURCE_DIR}/cmake/Utils.cmake)
+
 # Collect source files
-file(GLOB SRC_FILES 
-    "${CMAKE_SOURCE_DIR}/src/*.cpp" 
-)
+
+# # Glob all .cpp files
+glob_source_files_exclude_main(SRC_FILES "${CMAKE_SOURCE_DIR}/src")
 
 # Create an executable for the main program
 add_executable(main "${CMAKE_SOURCE_DIR}/src/main.cpp" ${SRC_FILES})
